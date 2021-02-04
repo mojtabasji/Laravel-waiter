@@ -1,0 +1,78 @@
+@extends('front.index')
+
+@section('content')
+    <hr>
+    <section class="ftco-section img" style="background-image: url({{ url('/front/img/icon/2.png') }})"
+        data-stellar-background-ratio="0.5">
+        <div class="container d-flex" dir="rtl">
+            <div class="row ">
+                <div class="col-md-7 ftco-animate makereservation p-4 px-md-5 pb-md-5 card" style="border-color: black">
+                    <div class="heading-section ftco-animate mb-5 text-center ">
+                        <h2 class="mb-4">صفحه عضویت</h2>
+                    </div>
+                    <form action="{{ route('member.store') }}" method="POST">
+                        @csrf
+                        <div class="row ">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="" class="float-right">نام</label>
+                                    <input name="name" type="text" style="border-color: black" class="form-control" placeholder="نام" @error('name')
+                                        is-invalid @enderror>
+                                    @error('name')
+                                        <div class="alert alert-danger">{{ $message }} </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group " style="direction: rtl">
+                                    <label for="userName" class="float-right">نام کاربری</label>
+                                    <input name="userName" style="border-color: black" type="text" id="userName" class="form-control"
+                                        placeholder="نام کاربری" @error('userName') is-invalid @enderror>
+                                    @error('userName')
+                                        <div class="alert alert-danger">{{ $message }} </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="" class="float-right">رمز عبور</label>
+                                    <input name="password" type="password" style="border-color: black" class="form-control" placeholder="رمز عبور"
+                                        @error('password') is-invalid @enderror>
+                                    @error('password')
+                                        <div class="alert alert-danger">{{ $message }} </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="" class="float-right">تکرار رمز عبور</label>
+                                    <input name="password_confirmation" style="border-color: black" type="password" class="form-control" id="book_date"
+                                        placeholder="تکرار رمز عبور" @error('password_confirmation') is-invalid @enderror>
+                                    @error('password_confirmation')
+                                        <div class="alert alert-danger">{{ $message }} </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group " style="direction: rtl">
+                                    <label for="" class="float-right">تلفن همراه</label>
+                                    <input name="phone" type="text" style="border-color: black" class="form-control" placeholder="شماره تلفن همراه"
+                                        @error('phone') is-invalid @enderror>
+                                    @error('phone')
+                                        <div class="alert alert-danger">{{ $message }} </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <div class="form-group text-center">
+                                    <input type="submit" value="ثبت" class="btn btn-primary py-3 px-5">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr>
+@endsection
