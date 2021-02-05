@@ -8,15 +8,15 @@
                 <div class="col-lg-9" dir="rtl">
 
                     <div class="heading-section ftco-animate mb-5 text-center ">
-                        <h2 class="mb-4">ویرایش غذا</h2>
+                        <h2 class="mb-4">افزودن غذا</h2>
                     </div>
-                    <form class="row contact_form" action="{{ route('admin.food.update', $food->id) }}" method="POST"
-                        id="contactForm" novalidate="novalidate">
+                    <form class="row contact_form" action="{{ route('admin.food.store') }}" method="POST" id="contactForm"
+                        novalidate="novalidate">
                         @csrf
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label style="font-size: 18px; color: black;">نام :</label>
-                                <input type="text" class="form-control" value="{{ $food->name }}"
+                                <input type="text" class="form-control"
                                     style="border: 2px solid rgb(61, 63, 206); border-radius: 4px;  color: black;"
                                     name="name" placeholder="نام" @error('name') is-invalid @enderror>
                                 @error('name')
@@ -25,7 +25,7 @@
                             </div>
                             <div class="form-group">
                                 <label style="font-size: 18px; color: black;">قیمت :</label>
-                                <input type="text" class="form-control" value="{{ $food->price }}"
+                                <input type="text" class="form-control"
                                     style="border: 2px solid rgb(61, 63, 206); border-radius: 4px;  color: black;"
                                     name="price" placeholder="" @error('price') is-invalid @enderror>
                                 @error('price')
@@ -33,15 +33,15 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
+                            <div class="from-group">
                                 <label style="font-size: 18px; color: black;">دسته ها :</label>
                                 <div class="form-select "
                                     style="color: black;  border: 2px solid rgb(61, 63, 206); border-radius: 4px;">
                                     <div id="output"></div>
                                     <select name="categories[]" class="chosen-select w-100 h-100 text-black border border-info rounded"
                                         multiple tabindex="2">
-                                        @foreach ($categories as $cat_id => $cat_name)
-                                            <option value="{{ $cat_id }}" <?php if(in_array($cat_id,$food->categories()->pluck('category_id')->toArray())) echo 'selected' ?>>{{ $cat_name }}</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="col-md-6">
                             <div id="holder" class="img-fluid">
-                                <img class="img-fluid" src="{{ $food->image }}">
+                                <img class="img-fluid">
                             </div>
                         </div>
                         <div class="col-md-12 text-right">
@@ -70,7 +70,7 @@
                                 <label style="font-size: 18px; color: black;">توضیحات :</label>
                                 <textarea class="form-control @error('description') is-invalid @enderror"
                                     style="border: 2px solid rgb(61, 63, 206); border-radius: 4px; color: black;"
-                                    name="description" placeholder="توضیحات">{{ $food->description }}</textarea>
+                                    name="description" placeholder="توضیحات"></textarea>
                                 @error('description')
                                     <div class="alert alert-danger">{{ $message }} </div>
                                 @enderror

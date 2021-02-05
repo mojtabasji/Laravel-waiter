@@ -57,10 +57,14 @@ mix.styles([
     'resources/back/css/magnific-popup.css',
     'resources/back/vendors/owl-carousel/owl.carousel.min.css',
     'resources/back/vendors/lightbox/simpleLightbox.css',
-    'resources/back/vendors/nice-select/css/nice-select.css',
+    //'resources/back/vendors/nice-select/css/nice-select.css',
     'resources/back/vendors/jquery-ui/jquery-ui.css',
     'resources/back/vendors/animate-css/animate.css',
     'resources/back/css/style.css',
+    /* chosen select
+    'resources/back/css/choisen/chosen.css',
+    'resources/back/css/choisen/prsim.css',
+    'resources/back/css/choisen/style.css',*/
 ],'public/back/css/all.css');
 
 mix.scripts([
@@ -70,7 +74,7 @@ mix.scripts([
     'resources/back/js/stellar.js',
     'resources/back/js/jquery.magnific-popup.min.js',
     'resources/back/vendors/lightbox/simpleLightbox.min.js',
-    'resources/back/vendors/nice-select/js/jquery.nice-select.min.js',
+    //'resources/back/vendors/nice-select/js/jquery.nice-select.min.js',
     'resources/back/vendors/owl-carousel/owl.carousel.min.js',
     'resources/back/vendors/jquery-ui/jquery-ui.js',
     'resources/back/js/jquery.ajaxchimp.min.js',
@@ -79,4 +83,8 @@ mix.scripts([
     'resources/back/js/mail-script.js',
     'resources/back/js/gmaps.min.js',
     'resources/back/js/theme.js',
+    /* chosen select
+    'resources/back/js/chosen.jquery.js',
+    'resources/back/js/init.js',
+    'resources/back/js/prism.js',*/
 ],'public/back/js/all.js');

@@ -25,9 +25,9 @@
                                 <div class="visit">{{ $user->userName }}</div>
                                 <div class="percentage">
                                     @if ($user->status == 1)
-                                        <a href="{{route('admin.users.updatestatus',$user->id)}}" class="genric-btn success circle">فعال</a>
+                                        <a href="{{route('admin.users.updatestatus',$user->id)}}" class="genric-btn success circle">اشغال</a>
                                     @else
-                                        <a href="{{route('admin.users.updatestatus',$user->id)}}" class="genric-btn success-border circle">غیر فعال</a>
+                                        <a href="{{route('admin.users.updatestatus',$user->id)}}" class="genric-btn success-border circle">خالی</a>
                                     @endif
                                 </div>
                                 <div class="percentage">

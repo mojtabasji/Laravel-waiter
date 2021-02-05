@@ -16,9 +16,9 @@ class CreateFoodTable extends Migration
         Schema::create('food', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image');
-            $table->text('description');
-            $table->integer('category_id');
+            $table->string('image')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('category_id')->nullable();
             $table->integer('price');
             $table->boolean('dayOffer');
             $table->timestamps();

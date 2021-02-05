@@ -27,7 +27,8 @@ class FoodController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::get();
+        return view('back.foods.create', compact('categories'));
     }
 
     /**
@@ -38,7 +39,16 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'categories' => 'required',
+            'price' => 'required',
+        ]);
+        $fd = new Food();
+
+        $fod = $fd->create($request->all());
+        $fod->categories()->attach($request->categories);
+        return redirect(route('admin.foods'));
     }
 
     /**
@@ -60,7 +70,8 @@ class FoodController extends Controller
      */
     public function edit(Food $food)
     {
-        return view('back.foods.foodedit', compact('food'));
+        $categories = Category::all()->pluck('name','id');
+        return view('back.foods.foodedit', compact('food','categories'));
     }
 
     /**
@@ -74,12 +85,10 @@ class FoodController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required',
-            'category_id' => 'required',
             'price' => 'required',
         ]);
 
         $food->name = $request->name;
-        $food->category_id = $request->category_id;
         $food->price = $request->price;
 
 
@@ -91,6 +100,7 @@ class FoodController extends Controller
 
 
         $food->save();
+        $food->categories()->sync($request->categories);
         return redirect(route('admin.foods'));
     }
 
@@ -102,7 +112,8 @@ class FoodController extends Controller
      */
     public function destroy(Food $food)
     {
-        //
+        $food->delete();
+        return redirect(route('admin.foods'));
     }
 
     public function updatedayOffer(Food $food)

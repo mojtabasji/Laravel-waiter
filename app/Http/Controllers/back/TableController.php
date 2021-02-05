@@ -36,9 +36,9 @@ class TableController extends Controller
 
 
         $user = new User();
-       // dd($request);
         try {
             $user = $user->create($request->all());
+            //dd($request);
 
             if (!empty($request->password)) {
                 $validatedData = $request->validate([
@@ -47,9 +47,11 @@ class TableController extends Controller
                 $password = Hash::make($request->password);
                 $user->password = $password;
             }
+
             $user->role = $request->role;
             $user->status = $request->status;
             $user->save();
+
         } catch (Exception $exception) {
             switch ($exception->getCode()) {
             }

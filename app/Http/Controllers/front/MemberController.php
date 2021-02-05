@@ -4,6 +4,7 @@ namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
 use App\Models\Member;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Exception;
@@ -18,11 +19,13 @@ class MemberController extends Controller
 
     public function enter(Request $request)
     {
+        $tables = User::where('role','=',3)->where('status', 0)->get();
+        //dd($tables);
         $member = Member::where('userName', '=', $request->userName)->first();
         if (!empty($member)) {
             if ($member->password == $request->password) {
                 $msg = 'ورود موفقت امیز';
-                return redirect()->back()->with('success', $msg);
+                return view('front.member.setdesk',compact('member','tables'));
             }
         }
         $msg = 'کاربر  و یا رمز عبور نا معتبر است';

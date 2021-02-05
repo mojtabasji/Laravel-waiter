@@ -5,6 +5,7 @@ namespace App\Http\Controllers\front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,8 @@ class MainController extends Controller
 
     public function menu()
     {
-        return view('front.main.menu');
+        $categories = Category::all();
+        return view('front.main.menu',compact('categories'));
     }
 
     public function register(Request $request)
@@ -33,6 +35,10 @@ class MainController extends Controller
         $table = User::where('userName', $request->userName)->first();
         $table->password = Hash::make($request->passwoed);
         $table->status = 1;
+        if(!empty($request->member_id))
+        {
+            $table->member_id = $request->member_id;
+        }
         $table->save();
 
         $credentials = $request->only('userName', 'password');
@@ -55,6 +61,7 @@ class MainController extends Controller
 
     public function logout(User $table)
     {
+        $table->member_id = -1;
         $table->status = 0;
         $table->save();
         Auth::logout($table);

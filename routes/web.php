@@ -62,6 +62,7 @@ Route::prefix('/admin')->middleware('Rolecheck')->group(function () {
     Route::get('/foods/destroy/{food}','back\FoodController@destroy')->middleware('Checkadmin')->name('admin.food.destroy');
     Route::get('/foods/updatedayOffer/{food}','back\FoodController@updatedayOffer')->middleware('Checkadmin')->name('admin.food.updatedayOffer');
     Route::post('/foods/update/{food}','back\FoodController@update')->middleware('Checkadmin')->name('admin.food.update');
+    Route::post('/foods/store','back\FoodController@store')->middleware('Checkadmin')->name('admin.food.store');
 
 });
 

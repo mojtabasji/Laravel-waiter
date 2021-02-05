@@ -24,7 +24,11 @@
                             <div class="table-row" style="color: black">
                                 <div class="serial">{{ $food->id }}</div>
                                 <div class="country">{{ $food->name }}</div>
-                                <div class="visit">{{ $food->category_id }}</div>
+                                <div class="visit">
+                                    @foreach ($food->categories()->pluck('name') as $category)
+                                        <div class="btn btn-warning">{{$category}}</div>
+                                    @endforeach
+                                </div>
                                 <div class="percentage"><?php echo Str::substr($food->description ,0, 25).'...' ?></div>
                                 <div class="visit">{{ $food->price }}</div>
                                 <div class="country">
