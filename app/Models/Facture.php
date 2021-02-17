@@ -5,31 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Food extends Model
+class Facture extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'image',
-        'description',
-        'category_id',
-        'price',
-        'dayOffer',
+        'user_id',
+        'date',
+        'cost',
+        'payed',
     ];
 
     protected $attributes = [
-        'dayOffer' => 0,
-        'category_id' => -1
+        'payed' => 0,
+        'cost' => 0 ,
     ];
 
-    public function categories()
+    public function user()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsTo(User::class);
     }
 
     public function orders()
     {
         return $this->hasMany(Order::class);
     }
+
 }

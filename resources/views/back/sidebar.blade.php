@@ -35,7 +35,8 @@
                         <li class="nav-item"><a class="nav-link" href="single-blog.html">Blog Details</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="contact.html"><img src="{{url('/back/img/header/nav-icon8.png')}}" alt="">contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{route('admin.orders')}}"><img src="{{url('/back/img/header/nav-icon8.png')}}" alt="">سفارشات</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{route('admin.factures')}}"><img src="{{url('/back/img/header/nav-icon8.png')}}" alt="">فاکتورها</a></li>
             </ul>
         </div>
     </div>

@@ -17,4 +17,10 @@ class Member extends Model
         'phone',
         'discount',
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
+
 }

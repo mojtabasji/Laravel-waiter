@@ -21,11 +21,25 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']
 
 
 Route::get('/', 'front\MainController@index')->name('home');
-Route::get('/menu', 'front\MainController@menu')->name('table.menu');
+Route::get('/menu', 'front\MainController@menu')->middleware('LoggedTable')->name('table.menu');
 Route::post('/table/register', 'front\MainController@register')->name('table.register');
+Route::post('/table/renter', 'front\MainController@renter')->name('table.renter');
 Route::post('/table/logout/{table}', 'front\MainController@logout')->name('table.logout');
 
+Route::get('/menu/food/{food}', 'front\FoodController@index')->name('food');
+
+Route::get('/basket/{user}', 'front\BasketController@index')->name('basket');
+Route::post('/basket/order/delete/{order}', 'front\BasketController@delete')->middleware('LoggedTable')->name('basket.order.delete');
+Route::get('/basket/order/increase/{order}', 'front\BasketController@increase')->middleware('LoggedTable')->name('basket.order.increase');
+Route::get('/basket/order/decrease/{order}', 'front\BasketController@decrease')->middleware('LoggedTable')->name('basket.order.decrease');
+
 Route::prefix('/admin')->middleware('Rolecheck')->group(function () {
+
+    Route::get('/orders', 'back\OrderController@index')->name('admin.orders');
+    Route::get('/orders/serve/{order}', 'back\OrderController@serve')->name('admin.order.serve');
+
+    Route::get('/factures', 'back\FactureController@index')->name('admin.factures');
+    Route::get('/factures/pay/{facture}', 'back\FactureController@pay')->name('admin.facture.pay');
 
     Route::get('/', 'back\AdminController@index')->name('admin');
     Route::post('/users/Estore', 'back\UserController@store')->name('admin.users.store');
@@ -71,6 +85,7 @@ Route::post('/member/enter', 'front\MemberController@enter')->name('member.enter
 Route::get('/member/register', 'front\MemberController@insert')->name('member.insert');
 Route::post('/member/store', 'front\MemberController@store')->name('member.store');
 
+Route::post('/order/add/{user}', 'front\ordercontroller@create')->middleware('LoggedTable')->name('order.add');
 
 
 Route::get('/nothing', [App\Http\Controllers\HomeController::class, 'index'])->name('hme');

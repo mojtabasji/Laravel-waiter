@@ -16,21 +16,24 @@
                         <div class="main-menu  d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
-                                    <li><a class="active" href="index.html">home</a></li>
+                                    <li><a class="active" href="{{ route('home') }}">خانه</a></li>
 
                                     @auth
-                                            <li><a href="#">{{ Auth::user()->name }} <i
-                                                        class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
-                                                    <li>
-                                                        <form action="<?php if(Auth::user()->role<3) echo route('logout'); else echo route('table.logout',Auth::user()->id) ?>" method="POST">
-                                                            @csrf
-                                                            <input class="btn btn-warning" style="width: 100%"
-                                                                type="submit" value="خروج">
-                                                        </form>
-                                                    </li>
-                                                </ul>
-                                            </li>
+                                        <li><a href="#">{{ Auth::user()->name }} <i class="ti-angle-down"></i></a>
+                                            <ul class="submenu">
+                                                <li>
+                                                    <form action="<?php if (Auth::user()->role < 3) {
+                                                            echo route('logout');
+                                                        } else {
+                                                            echo route('table.logout', Auth::user()->id);
+                                                        } ?>" method="POST">
+                                                        @csrf
+                                                        <input class="btn btn-warning" style="width: 100%" type="submit"
+                                                            value="خروج">
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </li>
                                     @else
                                         <li><a href="#">کارکنان</a>
                                             <ul class="submenu">
@@ -59,7 +62,12 @@
                                             <li><a href="single-blog.html">single-blog</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="{{ route('table.menu') }}">منو</a></li>
+                                    @auth
+                                        @if (Auth::user()->role == 3)
+                                            <li><a href="{{route('basket', Auth::user()->id)}}">سبد</a></li>
+                                        @endif
+                                    @endauth
                                 </ul>
                             </nav>
                         </div>

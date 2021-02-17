@@ -18,7 +18,7 @@
 
                             @foreach ($categories as $category)
                                 <li class="nav-item">
-                                    <a class="nav-link" id="pills-{{$category->name}}-tab" data-toggle="pill"
+                                    <a class="nav-link" id="pills-{{ $category->name }}-tab" data-toggle="pill"
                                         href="#pills-{{ $category->name }}" role="tab"
                                         aria-controls="pills-{{ $category->name }}">
                                         <div class="single_menu text-center">
@@ -53,34 +53,48 @@
                     <div class="tab-pane fade active" id="pills-{{ $category->name }}" role="tabpanel"
                         aria-labelledby="pills-{{ $category->name }}-tab">
                         <div class="row" dir="rtl">
-                            <?php $foods = $category->foods;
-                            foreach ($foods as $food) {
-                            echo '
-                            <div class="col-md-6 col-lg-6">
-                                <div class="single_delicious d-flex justify-content-center border border-info rounded">
-                                    <div class="thumb w-30 h-30 m-3">
-                                        <img class="w-100 h-100" src="' .
-                                        $food->image .
-                                        '" alt="">
-                                    </div>
-                                    <div class="info border border-warning rounded m-3">
-                                        <h3>' .
+                            @auth
+                                <?php
+                                $foods = $category->foods;
+                                foreach ($foods as $food) {
+                                echo '
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="single_delicious d-flex justify-content-center border border-info rounded" >
+                                        <div class="thumb w-30 h-30 m-3">
+                                            <a href="'.route('food',$food->id).'">
+                                            <img class="w-100 h-100" src="' .
+                                            $food->image .
+                                            '" alt=""> </a>
+                                        </div>
+                                        <div class="info border border-warning rounded m-3 p-3 justify-content-center" style="text-align: right">
+                                            <h3>' .
+                                                $food->id .
+                                                '. ' .
+                                                $food->name .
+                                                '</h3>
+                                            <span>' .
+                                                $food->price .
+                                                '</span>
+                                            <form class="container" action="' .
+                                            route('order.add', Auth::user()->id) .
+                                            '" method="POST" >'. csrf_field() .'
+                                                <input type="hidden" name="food_id" value="' .
                                             $food->id .
-                                            '. ' .
-                                            $food->name .
-                                            '</h3>
-                                        <p>' .
-                                            Str::substr($food->description, 0, 40) .
-                                            '</p>
-                                        <span>' .
-                                            $food->price .
-                                            '</span>
+                                            '">
+                                                <input type="hidden" name="user_id" value="' .
+                                            Auth::user()->id .
+                                            '">
+                                                <input type="number" class="form-control m-3" name="count" value="1">
+                                                <button type="submit"
+                                                    class="genric-btn primary circle float-center">انتخاب</button>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>';
-                            }
-                            ?>
+                                </div>';
+                                }
+                                ?>
 
+                            @endauth
                         </div>
                     </div>
 

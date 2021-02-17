@@ -115,10 +115,13 @@ class UserController extends Controller
 
     public function updatestatus(User $user)
     {
-        if ($user->status == 1)
+        if ($user->status == 1) {
             $user->status = 0;
-        else
+            $user->logged = 0;
+        } else {
             $user->status = 1;
+            $user->logged = 1;
+        }
         $user->save();
         return redirect()->back();
     }

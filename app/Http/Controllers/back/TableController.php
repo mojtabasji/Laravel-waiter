@@ -94,6 +94,7 @@ class TableController extends Controller
         $user->name = $request->name;
         $user->userName = $request->userName;
         $user->status = $request->status;
+        $user->logged = $request->status;
 
         try {
             $user->save();

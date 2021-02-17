@@ -51,6 +51,54 @@
                 </div>
             </div>
         </div>
+
+        <div class="container mt-3" dir="rtl">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="section_title text-center mb-50">
+                        <h3>ورود به میز انتخاب شده</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-7 ftco-animate makereservation p-4 px-md-5 pb-md-5 card " style="border-color: black">
+                    <div class="heading-section ftco-animate mb-5 text-center ">
+                        <h2 class="mb-4">ورود میز</h2>
+                    </div>
+                    <form action="{{ route('table.renter') }}" method="POST">
+                        @csrf
+                        <div class="row ">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div class="default-select d-flex row" dir="rtl" id="default-select">
+                                        <label for="tselect" class="float-right">میز :</label>
+                                        <select name="userName" id="tselect"
+                                            class="float-right col-md-12 border border-info rounded ">
+                                            @foreach ($rtables as $rtable)
+                                                <option value="{{$rtable->userName}}">{{$rtable->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group mt-5">
+                                    <label for="" class="float-right">رمز عبور</label>
+                                    <input name="password" type="password" class="form-control border border-info"
+                                        placeholder="رمز عبور" @error('password') is-invalid @enderror>
+                                    @error('password')
+                                        <div class="alert alert-danger">{{ $message }} </div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <div class="form-group text-center">
+                                    <input type="submit" value="ثبت" class="btn btn-primary py-3 px-5">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <hr>
 @endsection
